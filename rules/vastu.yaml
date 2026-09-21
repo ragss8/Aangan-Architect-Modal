@@ -1,0 +1,20 @@
+# Starter preferences supplied for this project. These are provisional.
+kitchen:
+  preferred:
+    - SE
+  alternatives:
+    - NW
+
+master_bedroom:
+  preferred:
+    - SW
+
+pooja:
+  preferred:
+    - NE
+
+living:
+  preferred:
+    - N
+    - NE
+    - E

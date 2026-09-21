@@ -1,0 +1,22 @@
+{
+  "plot": {
+    "width_ft": 30,
+    "depth_ft": 40,
+    "facing": "east"
+  },
+  "floors": [
+    {
+      "level": 0,
+      "rooms": [
+        {
+          "id": "living_01",
+          "type": "living",
+          "x": 0,
+          "y": 0,
+          "width": 12,
+          "depth": 15
+        }
+      ]
+    }
+  ]
+}

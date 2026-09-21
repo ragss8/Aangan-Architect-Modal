@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "architecture.schema.json",
+  "title": "Aangan Architecture JSON",
+  "description": "Version 1: a plot and its rectangular rooms. All coordinates and dimensions are in feet. The origin is the plot's southwest corner; x increases east and y increases north.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["plot", "floors"],
+  "properties": {
+    "plot": { "$ref": "#/$defs/plot" },
+    "floors": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/floor" }
+    }
+  },
+  "$defs": {
+    "plot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width_ft", "depth_ft", "facing"],
+      "properties": {
+        "width_ft": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "East-west plot size, measured along the x axis."
+        },
+        "depth_ft": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "South-north plot size, measured along the y axis."
+        },
+        "facing": {
+          "type": "string",
+          "enum": ["north", "east", "south", "west"],
+          "description": "Cardinal side of the plot fronting the road."
+        }
+      }
+    },
+    "floor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "rooms"],
+      "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "0 is the ground floor; positive integers are floors above it."
+        },
+        "rooms": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/room" }
+        }
+      }
+    },
+    "room": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "x", "y", "width", "depth"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
+          "description": "Globally unique room identifier, such as living_01."
+        },
+        "type": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
+          "description": "Room category in snake_case, such as living or master_bedroom."
+        },
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "description": "West edge of the room, measured east from the plot's west edge."
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "description": "South edge of the room, measured north from the plot's south edge."
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "East-west size of the room in feet."
+        },
+        "depth": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "South-north size of the room in feet."
+        }
+      }
+    }
+  }
+}
